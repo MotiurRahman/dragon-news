@@ -9,6 +9,8 @@ import {
   FaFacebook,
 } from "react-icons/fa";
 import ListGroup from "react-bootstrap/ListGroup";
+import { Carousel } from "react-bootstrap";
+import BrandCarousel from "../Brand/BrandCarousel";
 
 const RightSideNav = () => (
   <div>
@@ -37,6 +39,9 @@ const RightSideNav = () => (
         </ListGroup.Item>
         <ListGroup.Item className="mb-2">Vestibulum at eros</ListGroup.Item>
       </ListGroup>
+      <div>
+        <BrandCarousel></BrandCarousel>
+      </div>
     </div>
   </div>
 );
