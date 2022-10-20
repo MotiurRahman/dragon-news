@@ -9,6 +9,7 @@ import {
   FaFacebook,
 } from "react-icons/fa";
 import ListGroup from "react-bootstrap/ListGroup";
+import BrandCarosoul from "../BrandCarosoul/BrandCarosoul";
 
 const RightSideNav = () => (
   <div>
@@ -38,6 +39,7 @@ const RightSideNav = () => (
         <ListGroup.Item className="mb-2">Vestibulum at eros</ListGroup.Item>
       </ListGroup>
     </div>
+    <BrandCarosoul></BrandCarosoul>
   </div>
 );
 
