@@ -1,13 +1,12 @@
 import React from "react";
-import { useLoaderData } from "react-router-dom";
 import Card from "react-bootstrap/Card";
+import { Link } from "react-router-dom";
 import Image from "react-bootstrap/Image";
-import { FaBookmark, FaShareAlt, FaEye, FaStar } from "react-icons/fa";
+import { FaBookmark, FaEye, FaShareAlt, FaStar } from "react-icons/fa";
 
-const News = () => {
-  const specificNews = useLoaderData();
+const NewSummaryCard = ({ newsInfo }) => {
   const { rating, total_view, author, thumbnail_url, title, details, _id } =
-    specificNews;
+    newsInfo;
   return (
     <div>
       <Card>
@@ -16,13 +15,13 @@ const News = () => {
             <div className="d-flex">
               <Image
                 roundedCircle
-                src={author?.img}
+                src={author.img}
                 style={{ height: "60px" }}
               ></Image>
               <div className="ms-2">
-                <h4>{author?.name}</h4>
+                <h4>{author.name}</h4>
                 <p>
-                  <small>{author?.published_date}</small>
+                  <small>{author.published_date}</small>
                 </p>
               </div>
             </div>
@@ -36,7 +35,16 @@ const News = () => {
         <Card.Img variant="top" src={thumbnail_url} />
         <Card.Body>
           <Card.Title>{title}</Card.Title>
-          <Card.Text>{details}</Card.Text>
+          <Card.Text>
+            {details.length > 200 ? (
+              <p>
+                {details.slice(0, 250) + "..."}{" "}
+                <Link to={`/news/${_id}`}>Read More</Link>
+              </p>
+            ) : (
+              <p>{details}</p>
+            )}
+          </Card.Text>
         </Card.Body>
         <Card.Footer>
           <div className="d-flex align-items-center justify-content-between">
@@ -55,4 +63,4 @@ const News = () => {
   );
 };
 
-export default News;
+export default NewSummaryCard;
