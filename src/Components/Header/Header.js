@@ -42,11 +42,22 @@ const Header = () => {
                   src={user?.photoURL}
                 ></Image>
               ) : (
-                <FaUserAlt></FaUserAlt>
+                <FaUserAlt className="my-auto"></FaUserAlt>
               )}
             </Nav>
             <Nav className="ms-auto">
-              {user && <Button onClick={handleLogout}>Logout</Button>}
+              {user?.id ? (
+                <Button onClick={handleLogout}>Logout</Button>
+              ) : (
+                <>
+                  <Link className="m-2" to="/login">
+                    Login
+                  </Link>
+                  <Link className="m-2" to="/sign-up">
+                    Register
+                  </Link>
+                </>
+              )}
             </Nav>
 
             <div className="d-lg-none d-block">

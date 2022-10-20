@@ -1,4 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
+import Login from "../Components/Login/Login/Login";
+import Register from "../Components/Login/Register/Register";
 import Main from "../Layout/Main";
 import Category from "../Pages/Category/Category";
 import Home from "../Pages/Home/Home";
@@ -29,6 +31,14 @@ export const routes = createBrowserRouter([
         loader: async ({ params }) => {
           return fetch(`http://localhost:8000/news/${params.id}`);
         },
+      },
+      {
+        path: "/login",
+        element: <Login></Login>,
+      },
+      {
+        path: "/sign-up",
+        element: <Register></Register>,
       },
     ],
   },
