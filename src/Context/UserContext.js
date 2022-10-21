@@ -1,10 +1,13 @@
 import React, { createContext, useEffect, useState } from "react";
 import {
+  createUserWithEmailAndPassword,
   getAuth,
   GithubAuthProvider,
   onAuthStateChanged,
+  signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 import app from "../Firebaes/firebase.config";
 import { GoogleAuthProvider } from "firebase/auth";
@@ -28,9 +31,21 @@ const UserContext = ({ children }) => {
     return signInWithPopup(auth, githubProvider);
   };
 
+  const createUser = (email, password) => {
+    return createUserWithEmailAndPassword(auth, email, password);
+  };
+
+  const loginUser = (email, password) => {
+    return signInWithEmailAndPassword(auth, email, password);
+  };
+
   const logout = () => {
     setLoader(true);
     return signOut(auth);
+  };
+
+  const updateUserProfile = (profile) => {
+    return updateProfile(auth.currentUser, profile);
   };
 
   useEffect(() => {
@@ -41,7 +56,16 @@ const UserContext = ({ children }) => {
     return () => unsubscribe();
   }, []);
 
-  const authValue = { user, auth, signInwithGoogle, signInwithGithub, logout };
+  const authValue = {
+    user,
+    loader,
+    signInwithGoogle,
+    signInwithGithub,
+    logout,
+    createUser,
+    updateUserProfile,
+    loginUser,
+  };
   return (
     <div>
       <AuthContect.Provider value={authValue}>{children}</AuthContect.Provider>

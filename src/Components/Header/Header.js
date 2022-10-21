@@ -33,7 +33,7 @@ const Header = () => {
             <Nav className="me-auto">
               <Nav.Link href="#home">All News</Nav.Link>
               <Nav.Link href="#link">
-                {user?.displayName && "Welcome " + user?.displayName}
+                {user?.uid && "Welcome " + (user.displayName || user.email)}
               </Nav.Link>
               {user?.photoURL ? (
                 <Image
@@ -46,7 +46,7 @@ const Header = () => {
               )}
             </Nav>
             <Nav className="ms-auto">
-              {user?.id ? (
+              {user?.uid ? (
                 <Button onClick={handleLogout}>Logout</Button>
               ) : (
                 <>
