@@ -4,6 +4,7 @@ import {
   getAuth,
   GithubAuthProvider,
   onAuthStateChanged,
+  sendEmailVerification,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
@@ -32,11 +33,18 @@ const UserContext = ({ children }) => {
   };
 
   const createUser = (email, password) => {
+    setLoader(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   const loginUser = (email, password) => {
+    setLoader(true);
     return signInWithEmailAndPassword(auth, email, password);
+  };
+
+  const emailVerification = () => {
+    setLoader(true);
+    return sendEmailVerification(auth.currentUser);
   };
 
   const logout = () => {
@@ -50,7 +58,10 @@ const UserContext = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+      if (currentUser === null || currentUser.emailVerified) {
+        setUser(currentUser);
+      }
+
       setLoader(false);
     });
     return () => unsubscribe();
@@ -65,6 +76,8 @@ const UserContext = ({ children }) => {
     createUser,
     updateUserProfile,
     loginUser,
+    setLoader,
+    emailVerification,
   };
   return (
     <div>

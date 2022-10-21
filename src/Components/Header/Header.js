@@ -35,19 +35,12 @@ const Header = () => {
               <Nav.Link href="#link">
                 {user?.uid && "Welcome " + (user.displayName || user.email)}
               </Nav.Link>
-              {user?.photoURL ? (
-                <Image
-                  style={{ height: "40px" }}
-                  roundedCircle
-                  src={user?.photoURL}
-                ></Image>
-              ) : (
-                <FaUserAlt className="my-auto"></FaUserAlt>
-              )}
             </Nav>
             <Nav className="ms-auto">
               {user?.uid ? (
-                <Button onClick={handleLogout}>Logout</Button>
+                <Button variant="primary" onClick={handleLogout}>
+                  Logout
+                </Button>
               ) : (
                 <>
                   <Link className="m-2" to="/login">
@@ -58,6 +51,20 @@ const Header = () => {
                   </Link>
                 </>
               )}
+
+              <Nav.Link>
+                <Link to="/profile">
+                  {user?.photoURL ? (
+                    <Image
+                      style={{ height: "40px" }}
+                      roundedCircle
+                      src={user?.photoURL}
+                    ></Image>
+                  ) : (
+                    <FaUserAlt className="my-auto"></FaUserAlt>
+                  )}
+                </Link>
+              </Nav.Link>
             </Nav>
 
             <div className="d-lg-none d-block">

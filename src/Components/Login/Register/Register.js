@@ -1,11 +1,13 @@
 import React, { useContext, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContect } from "../../../Context/UserContext";
 
 const Register = () => {
-  const { createUser, updateUserProfile } = useContext(AuthContect);
+  const { createUser, updateUserProfile, emailVerification } =
+    useContext(AuthContect);
   const [msg, setMessage] = useState();
   const [accepted, setAccepted] = useState(false);
   const navigate = useNavigate();
@@ -18,6 +20,14 @@ const Register = () => {
     console.log(profile);
     updateUserProfile(profile)
       .then((result) => {
+        emailVerification().then(() => {
+          setMessage(
+            "An email verificaion mail has been send to your email. Please verify it"
+          );
+          toast(
+            "An email verificaion mail has been send to your email. Please verify it"
+          );
+        });
         navigate("/login");
       })
       .catch((error) => {
@@ -41,6 +51,7 @@ const Register = () => {
       .catch((error) => {
         const errorMessage = error.message;
         setMessage(errorMessage);
+        toast(errorMessage);
       });
     // setMessage("user Successfully Created");
   };

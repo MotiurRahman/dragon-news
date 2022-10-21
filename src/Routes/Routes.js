@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Login from "../Components/Login/Login/Login";
 import Register from "../Components/Login/Register/Register";
+import Profile from "../Components/Profile/Profile";
 import TermsAndCondition from "../Components/TermsAndCondition/TermsAndCondition";
 import Main from "../Layout/Main";
 import Category from "../Pages/Category/Category";
@@ -54,6 +55,14 @@ export const routes = createBrowserRouter([
       {
         path: "/terms",
         element: <TermsAndCondition></TermsAndCondition>,
+      },
+      {
+        path: "/profile",
+        element: (
+          <PrivateRoute>
+            <Profile></Profile>
+          </PrivateRoute>
+        ),
       },
     ],
   },
